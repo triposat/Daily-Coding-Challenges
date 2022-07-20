@@ -45,8 +45,14 @@ class Solution:
                     elif twoSum > x:
                         right -= 1
                     else:
-                        res = (nums[i], nums[j], nums[left], nums[right])
-                        ans.add(res)
-                        left += 1
-                        right -= 1
+                        res = [nums[i], nums[j], nums[left], nums[right]]
+                        ans.add((nums[i], nums[j], nums[left], nums[right]))
+                        while left < right and nums[left] == res[2]:
+                            left += 1
+                        while left < right and nums[right] == res[3]:
+                            right -= 1
+                while j+1 < n and nums[j+1] == nums[j]:
+                    j += 1
+            while i+1 < n and nums[i+1] == nums[i]:
+                i += 1
         return list(ans)
