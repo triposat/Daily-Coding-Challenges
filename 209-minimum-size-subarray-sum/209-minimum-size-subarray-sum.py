@@ -1,19 +1,14 @@
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        def bSear(left, right, val):
-            while left < right:
-                mid = (left+right) >> 1
-                if val-nums[mid] >= target:
-                    left = mid+1
-                else:
-                    right = mid
-            return left
-        res = len(nums)+1
-        for idx, val in enumerate(nums[1:], 1):
-            nums[idx] = nums[idx-1]+val
-        left = 0
-        for right, val in enumerate(nums):
-            if val >= target:
-                left = bSear(left, right, val)
-                res = min(res, right-left+1)
-        return res if res <= len(nums) else 0
+        j=0
+        i=0
+        add=0
+        mini=float("inf")
+        while j<len(nums):
+            add+=nums[j]
+            j+=1
+            while add>=target:
+                mini = min(mini, j-i)
+                add-=nums[i]
+                i+=1
+        return mini if mini!=float("inf") else 0
