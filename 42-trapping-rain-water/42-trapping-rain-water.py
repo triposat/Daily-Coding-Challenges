@@ -1,3 +1,7 @@
+# Most Optimal Solution
+# Time: O(n)
+# Space: O(1)
+
 class Solution:
     def trap(self, arr: List[int]) -> int:
         n = len(arr)
