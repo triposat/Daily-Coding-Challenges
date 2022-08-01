@@ -31,6 +31,5 @@ class Solution:
         r = m-1
         res = 1
         for i in range(1, r+1):
-            res = res*(N-r+i)//i
+            res = res * (N-r+i)//i
         return res
-    
