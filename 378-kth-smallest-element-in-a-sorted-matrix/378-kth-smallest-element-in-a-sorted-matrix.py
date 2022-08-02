@@ -1,16 +1,23 @@
-# Time: O(m*n*logk)
-# Space: O(k)
-
 class Solution:
     def kthSmallest(self, mat: List[List[int]], k: int) -> int:
-        heap = []
-        heapify(heap)
-        heappush(heap, (mat[0][0], 0, 0))
-        while k > 0:
-            res, row, col = heappop(heap)
-            if row == 0 and col+1 < len(mat):
-                heappush(heap, (mat[row][col+1], row, col+1))
-            if row+1 < len(mat):
-                heappush(heap, (mat[row+1][col], row+1, col))
-            k -= 1
-        return res
+        left = mat[0][0]
+        right = mat[-1][-1]
+        ans = -1
+
+        def countLE(mid):
+            col = len(mat[0])-1
+            cnt = 0
+            for row in range(len(mat)):
+                while col >= 0 and mat[row][col] > mid:
+                    col -= 1
+                cnt += (col+1)
+            return cnt
+
+        while left <= right:
+            mid = (left+right) >> 1
+            if countLE(mid) >= k:
+                ans = mid
+                right = mid-1
+            else:
+                left = mid+1
+        return ans
