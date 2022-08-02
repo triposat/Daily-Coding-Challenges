@@ -1,3 +1,6 @@
+# Time: O(m*n*logk)
+# Space: O(k)
+
 class Solution:
     def kthSmallest(self, mat: List[List[int]], k: int) -> int:
         heap = []
@@ -10,4 +13,3 @@ class Solution:
                 if len(heap) > k:
                     heappop(heap)
         return -heappop(heap)
-
