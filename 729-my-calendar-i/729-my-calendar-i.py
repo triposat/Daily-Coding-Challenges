@@ -1,15 +1,17 @@
 class MyCalendar:
 
     def __init__(self):
-        self.ans=[]
+        self.ans = []
 
-    def book(self, s1: int, e1: int) -> bool:
-        for s0, e0 in self.ans:
-            if not (s1>=e0 or e1<=s0):
-                return False
-        self.ans.append((s1, e1))
-        return True
-
+    def book(self, start: int, end: int) -> bool:
+        ans = self.ans
+        idx = bisect_left(ans, (start, end))
+        left_valid = idx == 0 or ans[idx-1][1] <= start
+        right_valid = idx == len(ans) or ans[idx][0] >= end
+        if left_valid and right_valid:
+            ans.insert(idx, (start, end))
+            return True
+        return False
 
 # Your MyCalendar object will be instantiated and called as such:
 # obj = MyCalendar()
