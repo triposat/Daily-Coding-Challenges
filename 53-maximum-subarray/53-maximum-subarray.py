@@ -1,17 +1,14 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
+        pref = nums[:]
+        suf=nums[:]
+        for i in range(1, len(nums)):
+            pref[i]+=max(0, pref[i-1])
+        for i in range(len(nums)-2, -1, -1):
+            suf[i]+=max(0, suf[i+1])
         def ans(arr, l, r):
-            if l > r:
-                return -inf
+            if l == r:
+                return arr[l]
             mid = (l+r)//2
-            leftSum = 0
-            rightSum = 0
-            curSum = 0
-            for i in range(mid-1, l-1, -1):
-                leftSum = max(leftSum, curSum := curSum+arr[i])
-            curSum = 0
-            for j in range(mid+1, r+1):
-                rightSum = max(rightSum, curSum := curSum+arr[j])
-            print(leftSum, rightSum)
-            return max(ans(arr, l, mid-1), ans(arr, mid+1, r), leftSum+arr[mid]+rightSum)
+            return max(ans(arr, l, mid), ans(arr, mid+1, r), pref[mid]+suf[mid+1])
         return ans(nums, 0, len(nums)-1)
