@@ -1,9 +1,10 @@
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        pref=nums[:]
-        suf=nums[:]
-        for i in range(1, len(nums)):
-            pref[i]*=pref[i-1] or 1
-        for i in range(len(nums)-2, -1, -1):
-            suf[i]*=suf[i+1] or 1
-        return max(pref+suf)
+        pref=0
+        suf=0
+        maxi=-float("inf")
+        for i in range(len(nums)):
+            pref=nums[i]*(pref or 1)
+            suf=nums[~i]*(suf or 1)
+            maxi=max(maxi, pref, suf)
+        return maxi
