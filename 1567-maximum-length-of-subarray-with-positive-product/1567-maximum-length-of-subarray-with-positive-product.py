@@ -1,31 +1,30 @@
+# Sliding window approach
 class Solution:
     def getMaxLen(self, nums: List[int]) -> int:
-        mx=0
-        i=0
-        # j=0
-        while i<len(nums):
-            negS=-1
-            negE=-1
-            p=0
-            n=0
-            j=i
-            while j<len(nums):
-            # for j in range(i, len(nums)):
-                if nums[j]>0:
-                    p+=1
-                if nums[j]<0:
-                    n+=1
-                    negE=j
-                if nums[j]<0 and negS==-1:
-                    negS=j
-                if nums[j]==0:
+        mx = 0
+        n = len(nums)
+        i = 0
+        while i < n:
+            negS = -1  # It will store the index of first negative number
+            negE = -1  # It will store the last index of negative number
+            pos = 0
+            neg = 0
+            j = i
+            while j < n:
+                if nums[j] > 0:
+                    pos += 1
+                elif nums[j] < 0:
+                    neg += 1
+                    negE = j
+                if nums[j] < 0 and negS == -1:
+                    negS = j
+                elif nums[j] == 0:  # End the subrray, because after that all the product will be 0
                     break
-                j+=1
-            if not n&1:
-                mx=max(mx, n+p)
-            if n&1:
-                mx=max(mx, j-negS-1)
-                mx=max(mx, negE-i)
-            i=j+1
+                j += 1
+            if not neg & 1:  # If negative numbers are even
+                mx = max(mx, neg+pos)
+            else:
+                mx = max(mx, j-negS-1)  # Ignore the first negative number
+                mx = max(mx, negE-i)  # Ingnore the last negative number
+            i = j+1  # Now, start from the new subarray
         return mx
-    
