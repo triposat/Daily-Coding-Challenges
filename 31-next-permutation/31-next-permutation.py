@@ -1,29 +1,19 @@
 class Solution:
-    def nextPermutation(self, nums: List[int]) -> None:
-        n = len(nums)
+    def nextPermutation(self, arr: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(arr)
         if n <= 1:
             return
-
-        # 1st Step...
-        i = n-2
-        while i >= 0 and nums[i] >= nums[i+1]:
-            i -= 1
-        # ...
-
-        if i < 0:
-            # It shows that all the elements are in descending order.
-            nums[:] = nums[::-1]
+        j = n-2
+        while j >= 0 and arr[j] >= arr[j+1]:
+            j -= 1
+        if j < 0:
+            arr[:] = arr[::-1]
         else:
-            # 2nd Step...
-            j = n-1
-            while nums[j] <= nums[i]:
-                j -= 1
-            # ...
-
-            # 3rd Step...
-            nums[i], nums[j] = nums[j], nums[i]
-            # ...
-
-            # 4th Step...
-            nums[i+1:] = sorted(nums[i+1:])
-            # ...
+            i = n-1
+            while arr[i] <= arr[j]:
+                i -= 1
+            arr[j], arr[i] = arr[i], arr[j]
+            arr[j+1:] = sorted(arr[j+1:])
