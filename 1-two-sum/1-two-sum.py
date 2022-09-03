@@ -1,8 +1,10 @@
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        hmap = {}
-        for idx, val in enumerate(nums):
-            rem = target-val
-            if rem in hmap:
-                return [hmap[rem], idx]
-            hmap[val] = idx
+    def twoSum(self, arr: List[int], k: int) -> List[int]:
+        from collections import defaultdict
+        s = defaultdict(int)
+        cnt = 0
+        for idx, ele in enumerate(arr):
+            if k-ele in s:
+                return [s[k-ele], idx]
+            s[ele] = idx
+        return cnt
