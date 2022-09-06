@@ -1,12 +1,11 @@
 class Solution:
     def numberOfWays(self, startPos: int, endPos: int, k: int) -> int:
-        n = k
+        diff = abs(endPos-startPos)
         m = 10**9+7
-        diff=abs(endPos-startPos)
-        if diff>k:
-            return 0
+
+        n = k
         r = (k-diff)//2
-        res = 1
-        if diff % 2 != k % 2:
+
+        if diff % 2 != k % 2 or diff > k:
             return 0
-        return comb(n, r)%m
+        return comb(n, r) % m
