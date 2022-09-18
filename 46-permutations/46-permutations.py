@@ -9,4 +9,3 @@ class Solution:
 
         res=[]
         return dfs(nums, [], res)
-        return res
