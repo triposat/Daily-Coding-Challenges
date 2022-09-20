@@ -1,13 +1,11 @@
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
-        res=[]
+        small, big =(1<<31), (1<<31)
         for ele in nums:
-            idx=bisect_left(res, ele)
-            print(idx)
-            if idx==len(res):
-                res.append(ele)
-                if len(res)==3:
-                    return True
+            if ele<=small:
+                small=ele
+            elif ele<=big:
+                big=ele
             else:
-                res[idx]=ele
+                return True
         return False
