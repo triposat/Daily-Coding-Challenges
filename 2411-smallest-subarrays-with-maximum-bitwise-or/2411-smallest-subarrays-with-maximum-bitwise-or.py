@@ -8,7 +8,7 @@ class Solution:
         res = []
         for i in range(len(nums)):
             end = i
-            for idx, arr in ans.items():
+            for _, arr in ans.items():
                 if arr and i > arr[0]:
                     arr.popleft()
                 if arr:
