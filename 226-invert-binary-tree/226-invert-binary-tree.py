@@ -7,10 +7,10 @@
 class Solution:
     def invertTree(self, root):
         # Recursive Approach
-        # if root:
-        #     root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
-        #     return root
-        
+        if root:
+            root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+            return root
+
         # Iterative Approach
         stack=[root]
         while stack:
